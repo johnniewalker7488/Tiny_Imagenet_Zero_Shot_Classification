@@ -49,7 +49,7 @@ class ResNet(nn.Module):
         
         self.res4_1 = ResBlock(512, 512, 1)              # 8x8
         self.res4_2 = ResBlock(512, 1024, 1)
-        self.drop2d = nn.Dropout2d(0.3)
+#         self.drop2d = nn.Dropout2d(0.3)
         
         
         self.avgpool = nn.AvgPool2d(8)
@@ -58,7 +58,8 @@ class ResNet(nn.Module):
         
         self.bn1 = nn.BatchNorm1d(300)
         self.activation = nn.ReLU()
-        self.dropout = nn.Dropout(0.2)
+        self.bn2 = nn.BatchNorm1d(300)
+        self.dropout = nn.Dropout(0.5)
         self.linear2 = nn.Linear(300, num_classes)
 
     def forward(self, x):
@@ -80,9 +81,10 @@ class ResNet(nn.Module):
         
         out = self.avgpool(out)
         out = self.flatten(out)
-        emb = self.linear1(out)
-        bn1 = self.bn1(emb)
-        act = self.activation(bn1)
-        out = self.dropout(act)
+        out = self.linear1(out)
+#         bn1 = self.bn1(out)
+        act = self.activation(out)
+        emb = self.bn2(act)
+        out = self.dropout(emb)
         out = self.linear2(out)
         return out, emb

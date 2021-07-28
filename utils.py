@@ -14,11 +14,6 @@ def accuracy(outputs, labels):
     return torch.tensor(torch.sum(preds == labels).item() / len(preds))
 
 
-def save_checkpoint(state, file_name='model_weights.pth.tar'):
-    #     print('--> Saving checkpoint')
-    torch.save(state, file_name)
-
-
 def load_checkpoint(checkpoint, optimizer):
     print('--> Loading checkpoint')
     model.load_state_dict(checkpoint['state_dict'])

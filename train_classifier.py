@@ -42,7 +42,6 @@ def train_net(model, num_epochs, train_loader, val_loader, max_lr=0.001, schedul
 
     history = []
     learning_rates = []
-    total_val_loss = []
 
     for epoch in range(num_epochs):
         train_losses = []
@@ -94,8 +93,6 @@ def train_net(model, num_epochs, train_loader, val_loader, max_lr=0.001, schedul
         avg_train_acc = torch.tensor(train_accs).mean().item()  # train accuracy per epoch
         avg_val_loss = torch.tensor(val_losses).mean().item()  # validation loss per epoch
         avg_val_acc = torch.tensor(val_accs).mean().item()  # validation accuracy per epoch
-
-        total_val_loss.append(avg_val_loss)
 
         end_time = time() - start
         line = "Epoch[{:d}] Train_loss: {:.4f}  Val_loss: {:.4f}\t Train_acc: {:.4f}  Val_acc: {:.4f} LR: {:.5f} time: {:.2f}".format(
