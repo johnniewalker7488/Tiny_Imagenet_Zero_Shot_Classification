@@ -14,4 +14,4 @@ In a zero-shot learning pipeline we get feature embeddings from images and also 
 <img width="394" alt="zero_shot_pipeline (1)" src="https://user-images.githubusercontent.com/44619521/127662474-27f73ccf-0c08-459c-a4c6-6a9e2c5f8700.PNG">
 
 ## Implementation and Results
-This is a simple example of zero-shot learning approach using pretrained Google News word2vec vectors as semantic embeddings. Using cosine embedding loss in addition to the cross-entropy loss gave us __25.85% top-5 accuracy__ on 50 __unseen__ classes with random guessing of 10%. 
+This is a simple example of zero-shot learning approach using a custom ResNet as the CNN feature extractor and the pretrained Google News word2vec vectors as semantic embeddings. Using cosine embedding loss in addition to the cross-entropy loss gives __25.85% top-5 accuracy__ on 50 __unseen__ classes with random guessing of 10%. 
