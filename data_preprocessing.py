@@ -64,9 +64,11 @@ def create_datasets():
     
     train_dataset = ImageFolder(data_dir + '/train', train_tfms)
     valid_dataset = ImageFolder(data_dir + '/validation', valid_tfms)
+    zsl_dataset = ImageFolder(data_dir+'/zero_shot_from_train', transform=ToTensor())
     print('Train set images:', len(train_dataset))
     print('Validation set images:', len(valid_dataset))
-    return train_dataset, valid_dataset
+    print('ZSL set images:', len(zsl_dataset))
+    return train_dataset, valid_dataset, zsl_dataset
 
 
 # split classes into seen (train) and unseen(zsl)
@@ -77,7 +79,7 @@ def split_classes():
     print('Categories split into seen and unseen')
     return train_cat, zsl_cat
 
-def preprocess_labels(train_ds):
+def preprocess_labels(train_ds, zsl_ds):
     # get labels for classes from annotations
     train_cat, zsl_cat = split_classes()
     labels = pd.read_csv('./words.txt', sep='\t', header=None)
@@ -92,12 +94,19 @@ def preprocess_labels(train_ds):
     print('Labels transformed into average labels')
 
     label_id_list = train_labels_df[0].tolist()  # list of 'n01234567'-type train classnames
+    zsl_classes = zsl_labels_df[0].tolist()
     label_vecs = {
         classname: torch.from_numpy(GOOGLE_VECS[train_labels_df[train_labels_df[0] == classname]['average_label']])
         for classname in label_id_list}  # 'n01234567'-type train classname : 1x300 vector
-
+    
+    zsl_label_vecs = {
+        classname: torch.from_numpy(GOOGLE_VECS[zsl_labels_df[zsl_labels_df[0] == classname]['average_label']]) 
+        for classname in zsl_classes} # zsl classname : google vector 
+    
     # target index in DataLoader : target 'n01234567'-type id -- for comparing vectors
     target_labels = {v: k for k, v in train_ds.class_to_idx.items()}
+    zsl_target_labels = {v: k for k, v in zsl_ds.class_to_idx.items()} 
+    print('Label vectors preprocessed')
 
     label_vecs_list = list(label_vecs.values())  # list of 150 1x300 train labels vectors
     train_target_vectors = torch.cat(label_vecs_list)  # 150x300 tensor of train labels vectors
@@ -107,4 +116,4 @@ def preprocess_labels(train_ds):
     train_target_vectors_norm.requires_grad = False
     print('Target vectors normalized')
     
-    return label_vecs, target_labels, train_target_vectors_norm
+    return label_vecs, target_labels, zsl_label_vecs, zsl_target_labels, train_target_vectors_norm

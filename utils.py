@@ -83,7 +83,7 @@ def plot_accuracies(history, learning_rates, train_loader, file_name='accs', fig
     plt.show()
 
 
-def predict_image(img, model):
+def predict_image(img, model, train_ds):
     x = img.unsqueeze(0).to(device)
     y = model(x)[0]
     _, pred = torch.max(y, dim=1)

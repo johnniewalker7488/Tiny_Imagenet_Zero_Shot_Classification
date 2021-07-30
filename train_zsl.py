@@ -137,7 +137,7 @@ def train_zsl(model,
         total_val_loss.append(avg_val_loss)
 
         end_time = time() - start
-        line = "Epoch[{:d}] Train_loss: {:.4f}  Val_loss: {:.4f} Val_CE: {:.4f} Val_mse: {:.4f}\t Train_acc: {:.4f}  Val_acc: {:.4f} LR: {:.5f} time: {:.2f}".format(
+        line = "Epoch[{:d}] Train_loss: {:.4f}  Val_loss: {:.4f} Val_CE: {:.4f} Val_vec_loss: {:.4f}\t Train_acc: {:.4f}  Val_acc: {:.4f} LR: {:.5f} time: {:.2f}".format(
             epoch,
             train_loss.item(),
             avg_val_loss,
