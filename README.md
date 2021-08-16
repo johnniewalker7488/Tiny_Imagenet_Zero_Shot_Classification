@@ -2,7 +2,7 @@
 Zero-shot classification methods tested on Tiny Imagenet dataset
 
 ## What is Zero-Shot Learning?
-As soon as in classic image recongition tasks we need to label images to be able to learn a model at some moment we encounter a problem of scalability. 
+As soon as in classic image recongition tasks we need to label images to be able to train a model at some moment we encounter a problem of scalability. 
 We are unable to permanently increase the number of classes as it becomes too expensive to label more and more of them.
 However, it is not necessary for humans to _see_ an object in advance to be able to recognize it.
 Let say, a child can recognize a zebra on a picture even if he has never seen a zebra before. It is enough for him to have seen a horse and also _learn somewhere_ that zebra looks like a horse and has black and white stripes.
