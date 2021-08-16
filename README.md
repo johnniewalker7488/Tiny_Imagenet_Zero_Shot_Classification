@@ -9,7 +9,7 @@ Let say, a child can recognize a zebra on a picture even if he has never seen a 
 In case of computer vision this is what's called zero-shot learning.
 
 ## How Zero-Shot Learning Works
-In a zero-shot learning pipeline we get feature embeddings from images and also some semantic embeddings as an auxiliary dataset. As for image feature embeddings it is an easy task for a convolutional neural network while semantic embeddings can be obtained from a pretrained word2vec model. After that we are to minimize the distance between the two distributions we obtained and then use some KNN-based algorythm to find the closest word embedding to the embedding of the input image.
+In a zero-shot learning pipeline we get feature embeddings from images and also some semantic embeddings as an auxiliary dataset. As for image feature embeddings it is an easy task for a convolutional neural network while semantic embeddings can be obtained from a pretrained word2vec model. After that we are to minimize the distance between the two distributions we obtained and then use some KNN-based algorithm to find the closest word embedding to the embedding of the input image.
 
 <img width="394" alt="zero_shot_pipeline (1)" src="https://user-images.githubusercontent.com/44619521/127662474-27f73ccf-0c08-459c-a4c6-6a9e2c5f8700.PNG">
 
